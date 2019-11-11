@@ -21,6 +21,8 @@
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="css/creative.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="https://seeklogo.com/images/N/nust-logo-E161A9240F-seeklogo.com.PNG" type="image/vnd.microsoft.icon" />
+
+
   <style type="text/css">
     body { 
       background: url("img/bus.jpg") no-repeat center center fixed; 
@@ -36,15 +38,15 @@
 
 <body id="page-top">
   <header>
-    <div class="container" style="margin-top: 50px;">
+    <div class="container" style="margin-top: -20px;">
       <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-4 col-md-7">
+        <div class="col-lg-1 col-md-0"></div>
+        <div class="col-lg-4 col-md-3" style="margin-top:100px;">
           <h1 style="font-size:70px;text-align: center;color: white; margin-top:50px; text-shadow: 2px 2px 4px #000000;"> NUST Transport Portal</h1>
           <hr class="divider my-4">
           <h5 style="color:white;text-align: center; text-shadow: 2px 2px 4px #000000;"> Login to view your fee challans </h5>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2 col-md-4"></div>
         <div class="col-lg-5 col-md-5">
           <div class="card card-register mt-5 shadow-lg">
             <div class="card-header shadow text-center">Register an Account</div>
@@ -65,8 +67,41 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-label-group mb-1">
+                        <input type="text" id="phone" class="form-control" placeholder="Phone Number" required="required">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-label-group mb-1">
+                        <input type="text" id="cms" class="form-control" placeholder="CMS ID" required="required">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-label-group mb-1">
+                        <input type="text" id="batch" class="form-control" placeholder="Batch" required="required">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-label-group mb-1">
+                        <input type="text" id="class" class="form-control" placeholder="Class and Section" required="required">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
                   <div class="form-label-group">
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <textarea class="form-control" rows="2" id="address" placeholder="Home address"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
