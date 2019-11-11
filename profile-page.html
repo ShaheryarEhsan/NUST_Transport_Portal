@@ -152,7 +152,10 @@
 #fbtn{
 	position: relative;
 	top: 40px;
-	left: 80%;
+}
+
+@media screen and (max-width: 480px;){
+	#feedback{left: 0%;}
 }
 
 </style>
@@ -163,13 +166,13 @@
 <body>
 	<script type="text/javascript">
         function fbin(){
-            document.getElementById('feedback').className = "feedin mb-4 col-md-6 shadow-lg";
+            document.getElementById('feedback').className = "feedin mb-4 col-md-6 col-sm-6 shadow-lg";
             document.getElementById('feedback').style.display = "block";
             document.getElementById('feedback').style.left = "48%" ;
             document.getElementById('fbtn').style.display = "none";
         }  
         function fbout(){
-            document.getElementById('feedback').className = "feedout mb-4 col-md-6 shadow-lg";
+            document.getElementById('feedback').className = "feedout mb-4 col-md-6 col-sm-6 shadow-lg";
             document.getElementById('feedback').style.left = "100%" ;
             document.getElementById('feedback').style.display = "none";
             document.getElementById('fbtn').style.display = "block";
@@ -284,9 +287,8 @@
         </form>           
     </div>
     <!------------- FEEDBACK FORM STARTS HERE ------------------>
-
-
-<div class="mb-4 col-md-6 shadow-lg" id="feedback">
+<div class="col-md-6 col-sm-1"></div>
+<div class="mb-4 col-md-6 col-sm-6 shadow-lg" id="feedback">
     <div class="row">
         <div class="col-md-11"></div>
         <a class="btn" href="#" onclick="fbout()"><i class='fa fa-2x fa-close'></i></a>
@@ -379,8 +381,12 @@
         </div>
     </div>
 </div>
-<button class="btn btn-dark btn-lg" id="fbtn" onclick="fbin()">Got any feedback?</button>
-
+<div class="row">
+	<div class="col-md-9 col-sm-8"></div>
+	<div class="col-md-3 col-sm-4">
+		<button class="btn btn-dark btn-lg" id="fbtn" onclick="fbin()">Got any feedback?</button>
+	</div>
+</div>
 
 </body>
 </html>
