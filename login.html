@@ -23,95 +23,29 @@
   <link rel="shortcut icon" href="https://seeklogo.com/images/N/nust-logo-E161A9240F-seeklogo.com.PNG" type="image/vnd.microsoft.icon" />
 
   <style type="text/css">
+     body { 
+      background: url("img/bus.jpg") no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
  
-    /* Style the video: 100% width and height to cover the entire window */
-  
-header {
-  position: relative;
-  background-color: black;
-  height: 75vh;
-  min-height: 25rem;
-  width: 100%;
-  height:100%;
-  overflow: hidden;
-
-}
-
-header video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: 0;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-}
-
-header .container {
-  position: relative;
-  z-index: 2;
-}
-
-header .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.5;
-  z-index: 1;
-}
-
-@media (pointer: coarse) and (hover: none) {
-  header {
-    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
-  }
-  header video {
-    display: none;
-  }
-  
-}
-@media screen and (max-width: 768px) {
-  header {
-    overflow: scroll;
-  }
-}
-}
-
   </style>
 
 </head>
-
-
-
-
-
-
 <body >
-
- 
-
   
 <header>
-  <div class="overlay"></div>
-  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-    <source src="nust.mp4" type="video/mp4">
-  </video>
  <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-3"> 
-          <h1 style="font-size:70px;text-align: center;color: white; margin-top:150px;"> NUST Transport Portal</h1>
+          <h1 style="font-size:70px;text-align: center;color: white; margin-top:100px; text-shadow: 2px 2px 4px #000000;"> NUST Transport Portal</h1>
           <hr class="divider my-4">
-          <h5 style="color:white;text-align: center"> Login to view your fee challans </h5>
+          <h5 style="color:white;text-align: center; text-shadow: 2px 2px 4px #000000;"> Login to view your fee challans </h5>
         </div>
         <div class="col-lg-4 col-md-3"></div>
-        <div class="col-lg-4 col-md-6" style=" margin-top:150px;"> 
+        <div class="col-lg-4 col-md-6" style=" margin-top:100px;"> 
           <div class="card card-login shadow-lg">
             <div class="card-header shadow mb-2 text-center">Login</div>
             <div class="card-body">
@@ -134,11 +68,12 @@ header .overlay {
                     </label>
                   </div>
                 </div>
-                <a class="btn btn-info btn-block" href="#">Login</a>
+                <a class="btn btn-success btn-block" href="#">Login</a>
                 <a class="btn btn-danger btn-block" href="signup.html">Sign Up</a>
               </form>
             <div class="text-center">
               <a class="d-block small text-info mt-3" href="forgot-password.html">Forgot Password?</a>
+              <a class="d-block small text-info mt-3" href="index.html">Go back to Home?</a>
             </div>
           </div>
         </div>
