@@ -1,3 +1,34 @@
+<?php
+session_start();
+
+if(isset($_POST['user'])){
+    $str = "Hello world!";
+echo $str;
+echo "<br>What a nice day!";
+$em = $_POST["email"];
+$pass = $_POST["password"];
+
+echo $em;
+$username = "root";
+    $password = "";
+    $database = "ntp";
+    $mysqli = mysqli_connect("localhost", $username, $password, $database);
+
+    $query = "SELECT * FROM `users` WHERE `email` LIKE '$em' AND `password` LIKE '$pass'";
+    $select_data = mysqli_query($mysqli,$query);
+
+    while($row = mysqli_fetch_array($select_data)) {
+    echo print_r($row);
+
+
+}
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,6 +202,10 @@
 
 
 <body>
+
+
+
+
      <nav class="navbar navbar-expand-lg py-3" id = "mainNav"  style="background-color: #28313b;">
 
       <a class="navbar-brand" href="#page-top"><img src="http://nust.edu.pk/SiteCollectionImages/logo_SEECS_1.PNG" style="width: 65px; margin-left: 20px"></a>
@@ -229,6 +264,7 @@
                                 <h5>
                                     Talha Ikram
                                 </h5>
+                            
                                 <h6>
                                     Student of SEECS, Third Year
                                 </h6>

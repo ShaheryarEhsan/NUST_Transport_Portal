@@ -32,6 +32,49 @@
       }
  
   </style>
+  <script type="text/javascript">
+
+  function do_login(){
+    var email=$("#inputEmail").val();
+    var pass=$("#inputPassword").val();
+    if(email!="" && pass!=""){
+      $.ajax({type:'post',url:'do_login.php',data:{do_login:"do_login",email:email,password:pass},
+        success:function(response){
+         var soo = response.slice(1);
+          if(soo=="success"){
+            session(email, pass);
+          }
+          else{
+            alert("Wrong Details");
+          }
+        }
+      });
+    }
+    else{
+      alert("Please Fill All The Details");
+    }
+    return false;
+  }
+    function session(email, pass){
+      alert("success2");
+       $.ajax({
+                    type: 'post',
+                    url: 'profilepage.php',
+
+                    data: { user:'user',
+                    email:email,
+                    password:pass },
+
+                    success: function(response)
+                    {
+                      
+                       $.redirect('profilepage.php', {'user': 'user', 'email': email, 'password':pass});
+                    }
+                });
+    }
+
+</script>
+
 
 </head>
 <body >
@@ -49,15 +92,15 @@
           <div class="card card-login shadow-lg">
             <div class="card-header shadow mb-2 text-center">Login</div>
             <div class="card-body">
-              <form>
+              <form method = "post" action="profilepage.php" onsubmit="return do_login();">
                 <div class="form-group mt-3">
                   <div class="form-label-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+                    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="required">
                   </div>
                 </div>
                 <div class="form-group">
@@ -68,8 +111,8 @@
                     </label>
                   </div>
                 </div>
-                <a class="btn btn-success btn-block" href="profile-page.html">Login</a>
-                <a class="btn btn-danger btn-block" href="signup.html">Sign Up</a>
+                <input class="btn btn-success btn-block" type="submit" name="login" value="Login" id="login_button">
+                <a class="btn btn-danger btn-block" href="signup.php">Sign Up</a>
               </form>
             <div class="text-center">
               <a class="d-block small text-info mt-3" href="forgot-password.html">Forgot Password?</a>
@@ -80,5 +123,13 @@
         </div>
       </div>
     </header>
-  
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="jquery.redirect.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/creative.min.js"></script>
 </body>
