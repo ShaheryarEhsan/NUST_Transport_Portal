@@ -1,3 +1,10 @@
+<?php  
+  session_start();
+  if(isset($_SESSION['email'])){
+    header("location: profilepage.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +48,7 @@
       $.ajax({type:'post',url:'do_login.php',data:{do_login:"do_login",email:email,password:pass},
         success:function(response){
          var soo = response.slice(1);
-          if(soo=="success"){
+          if(soo=="success"||response=='success'){
             session(email, pass);
           }
           else{
@@ -56,7 +63,6 @@
     return false;
   }
     function session(email, pass){
-      alert("success2");
        $.ajax({
                     type: 'post',
                     url: 'profilepage.php',
@@ -115,8 +121,6 @@
                 <a class="btn btn-danger btn-block" href="signup.php">Sign Up</a>
               </form>
             <div class="text-center">
-              <a class="d-block small text-info mt-3" href="forgot-password.html">Forgot Password?</a>
-              <a class="d-block small text-info mt-3" href="admin-page.html">Admin Page</a>
               <a class="d-block small text-info mt-3" href="index.html">Go back to Home?</a>
             </div>
           </div>
@@ -125,7 +129,7 @@
     </header>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="jquery.redirect.js"></script>
+<script src="js/jquery.redirect.js"></script>
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>

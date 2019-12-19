@@ -21,7 +21,7 @@
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="css/creative.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="https://seeklogo.com/images/N/nust-logo-E161A9240F-seeklogo.com.PNG" type="image/vnd.microsoft.icon" />
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 
 
   <style type="text/css">
@@ -101,18 +101,44 @@
                 <div class='form-group'>
                   <div class='form-label-group'>
                     <label for="address">Select address area:</label>
-				  	<select class="form-control" id="address" name="address">
-					    <option>F6, Islamabad</option>
-					    <option>F7, Islamabad</option>
-					    <option>G9, Islamabad</option>
-					    <option>G11, Islamabad</option>
-					    <option>Westridge, Rawalpindi</option>
-					    <option>Askari 13, Rawalpindi</option>
-					    <option>DHA, Islamabad</option>
-					    <option>Bahria Town, Islamabad</option>
-				 	</select>
+        				  	<select class="form-control" id="address" name="address">
+        					    <option>F6, Islamabad</option>
+        					    <option>F7, Islamabad</option>
+        					    <option>G9, Islamabad</option>
+        					    <option>G11, Islamabad</option>
+        					    <option>Westridge, Rawalpindi</option>
+        					    <option>Askari 13, Rawalpindi</option>
+        					    <option>DHA, Islamabad</option>
+        					    <option>Bahria Town, Islamabad</option>
+        				 	</select>
                   </div>
                   <div id="addressOut"></div>
+                </div>
+                <div class='form-group'>
+                  <div class='form-label-group'>
+                    <label for="department">Select department:</label>
+    				  	<select class="form-control" id="dept" name="dept">
+    					    <option>SEECS</option>
+    					    <option>SMME</option>
+    					    <option>NBS</option>
+    					    <option>IESE</option>
+    					    <option>S3H</option>
+    					    <option>SCME</option>
+    					    <option>NICE</option>
+    					    <option>ASAB</option>
+    					    <option>SNS</option>
+    					    <option>CIE</option>
+    					    <option>IGIS</option>
+    				 	</select>
+                  </div>
+                </div>
+                <div class='form-group'>
+                  <div class='form-label-group'>
+    				  	<select class="form-control" id="type" name="type">
+    					    <option>Student</option>
+    					    <option>Faculty</option>
+    				 	</select>
+                  </div>
                 </div>
                 <div class='form-group'>
                   <div class='form-row'>
@@ -134,6 +160,7 @@
               </form>
               <div class='text-center'>
                 <a class='d-block small mt-3 text-info' href='login.php'>Login Page</a>
+                <a class='d-block small mt-3 text-info' href='index.html'>Back to home?</a>
               </div>
             </div>
           </div>

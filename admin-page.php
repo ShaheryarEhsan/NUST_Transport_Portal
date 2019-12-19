@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +22,28 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <script type="text/javascript">
-    function printchallaan(){
-
+  	function issue(){
+    	var month=$("#month").val();
+      	$.ajax({type:'post',url:'challaan.php',data:{challaan:"challaan",month:month},
+        	success:function(response){
+          		if(response=="success"){
+            		alert("Challaans have been issued");
+          		}
+          		else{
+            		alert("Something wrong happened :/");
+          		}
+        	}
+      	});
     }
+    function printchallaan(){
+    	var x = document.getElementById("pagecontent");
+    	x.innerHTML = "<h1 class='h3 mb-2 text-gray-800'>Issue Challaans</h1><p class='mb-4'>You can issue challaans to all of the users here.</p>";
+    	x.innerHTML += "<form class='mt-4 col-lg-4' id='challaan' name='challaan' onsubmit='return issue();' action='challaan.php' method='post'>";
+    	x.innerHTML += "<div class='form-group col-lg-4'><div class='form-label-group'><label for='month'>Select month:</label>";
+    	x.innerHTML += "<select class='form-control col-lg-4' id='month' name='month'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div></div>";
+    	x.innerHTML += "<button class='btn btn-dark btn-block col-lg-4 mt-4' onclick='issue();'>Issue</button>";
+    }
+    
   </script>
 
 </head>
@@ -70,7 +90,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="forgot-password.html">Issue bulk Chalaans</a>
+            <a class="collapse-item" href="#" onclick="printchallaan(); return false">Issue bulk Chalaans</a>
           </div>
         </div>
       </li>
@@ -145,8 +165,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Talha Ikram</span>
-                <img class="img-profile rounded-circle" src="img/talha.jpg">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['email'];?></span>
+                <img class="img-profile rounded-circle" src="img/bus.jpg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -168,7 +188,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div id = "pagecontent" class="container-fluid">
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Registrations</h1>
@@ -190,7 +210,7 @@
                       <th>CMS Number</th>
                       <th>Address</th>
                       <th>Email</th>
-                      <th>Issue Challan</th>
+                      <th>Fee</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -201,7 +221,7 @@
                     <th>CMS Number</th>
                     <th>Address</th>
                     <th>Email</th>
-                    <th>Issue Challan</th>
+                    <th>Fee</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -222,7 +242,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; NUST 2019</span>
           </div>
         </div>
       </footer>
@@ -252,7 +272,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="logout.php">Logout</a>
         </div>
       </div>
     </div>

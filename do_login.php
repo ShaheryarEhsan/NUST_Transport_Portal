@@ -1,10 +1,7 @@
-	<?php
+<?php include 'connection.php'; ?>
+<?php
 	session_start();
 	if(isset($_POST['do_login'])){
-		$username = "root";
-		$password = "";
-		$database = "ntp";
-		$mysqli = mysqli_connect("localhost", $username, $password, $database);
 
  		$email=$_POST['email'];
  		$pass=$_POST['password'];

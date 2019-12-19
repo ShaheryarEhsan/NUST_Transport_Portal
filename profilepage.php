@@ -1,28 +1,45 @@
+<?php include 'connection.php';  ?>
 <?php
-session_start();
 
-if(isset($_POST['user'])){
-    $str = "Hello world!";
-echo $str;
-echo "<br>What a nice day!";
-$em = $_POST["email"];
-$pass = $_POST["password"];
+    //Maintaining sessions
+    session_start();
+    if(isset($_POST['user'])){
+        $em = $_POST["email"];
+        $pass = $_POST["password"];
+    }
+    if (!isset($_SESSION['email'])){
+        $_SESSION['email'] = $em;
+    }
+    $em = $_SESSION['email'];
+    if ($_SESSION['email'] == 'root@root.com'){
+        header('location: admin-page.php');
+    }
 
-echo $em;
-$username = "root";
-    $password = "";
-    $database = "ntp";
-    $mysqli = mysqli_connect("localhost", $username, $password, $database);
-
-    $query = "SELECT * FROM `users` WHERE `email` LIKE '$em' AND `password` LIKE '$pass'";
+    $query = "SELECT * FROM `users` WHERE `email` LIKE '$em'";
     $select_data = mysqli_query($mysqli,$query);
 
     while($row = mysqli_fetch_array($select_data)) {
-    echo print_r($row);
+    
+
+    $fn = $row["firstName"];
+    $ln = $row["lastName"];
+    $phone = $row["phone"];
+    $cms = $row["cms"];
+    $em = $row["email"];
+    $add = $row['address'];
+    $dept = $row['department'];
+    $type = $row['type'];
+    $fee = $row['fee'];
+    $route = $row['route'];
 
 
 }
-}
+    $query = "SELECT * FROM `challaan` WHERE `email` LIKE '$em'";
+    $select_data = mysqli_query($mysqli,$query);
+    $dues = 0;
+    while($row = mysqli_fetch_array($select_data)){
+        $dues += $row['fee'];
+    }
 
 
 ?>
@@ -197,7 +214,6 @@ $username = "root";
 }
 
 </style>
-
 </head>
 
 
@@ -220,12 +236,12 @@ $username = "root";
                 <a class="nav-link" href="index.html"><h5>Home</h5></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link js-scroll-trigger" href="#page-top"><h5>About Us</h5></a>
+                <a class="nav-link js-scroll-trigger" href="aboutus.html"><h5>About Us</h5></a>
             </li>
           
           
             <li class="nav-item" style="margin-right: 40px">
-                <a class="nav-link" href="login.html"><h5>Log Out</h5></a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal"><h5>Log Out</h5></a>
             </li>
         </ul>
        
@@ -246,7 +262,26 @@ $username = "root";
         }  
         
 	</script>
+    <script type="text/javascript">
+        var email = "<?php echo $em; ?>";
+        
+        function session1(){
+            $.ajax({
+                type: 'post',
+                url: 'check_challaan.php',
 
+                data: { user:'user',
+                email:email},
+
+                success: function(response){
+                    window.alert(response);
+                    if (response == 'Redirecting to Challaan page'){
+                        $.redirect('challan.php', {'user': 'user', 'email': email});
+                    } 
+                }
+            });
+        }
+    </script>
 	<div class="container emp-profile">
         <form method="post">
             <div class="row">
@@ -262,13 +297,16 @@ $username = "root";
                 <div class="col-md-6">
                     <div class="profile-head">
                                 <h5>
-                                    Talha Ikram
+                                    <?php echo $fn; ?>
                                 </h5>
                             
                                 <h6>
-                                    Student of SEECS, Third Year
+                                    <?php echo $type." at ".$dept ?>
                                 </h6>
-                                <p class="proile-rating">Van Fee (Per Month) : <span>Rs. 5300 /-</span></p>
+                                <p class="proile-rating">Van Fee (Per Month) : <span><?php
+                                echo $fee;
+
+                                ?> /-</span></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -287,9 +325,8 @@ $username = "root";
                 <div class="col-md-4">
                     <div class="profile-work">
                         <p>LINKS</p>
-                        <a href="">Generate Challan Fee</a><br/>
-                        <a href="">Change Route</a><br/>
-                        <a href="">Cancel Transport</a>
+                        <a href="javascript:session1()">Generate Challan Fee</a><br/>
+                        <a href="#" data-toggle="modal" data-target="#urModal">Cancel Transport</a>
                         
                         
                     </div>
@@ -299,18 +336,20 @@ $username = "root";
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>User ID</label>
+                                            <label>First Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>tikram.bese17seecs</p>
+                                            <p><?php echo $fn;
+                                            ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Name</label>
+                                            <label>Last Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Talha Ikram</p>
+                                            <p><?php echo $ln;
+                                            ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -318,7 +357,8 @@ $username = "root";
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>tikram.bese17seecs@seecs.edu.pk</p>
+                                            <p><?php echo $em;
+                                            ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -326,7 +366,8 @@ $username = "root";
                                             <label>Phone</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>090078601</p>
+                                            <p><?php echo $phone;
+                                            ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -334,7 +375,8 @@ $username = "root";
                                             <label>Address</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>F6 Markaz, Near Mindanos, Islamabad</p>
+                                            <p><?php echo $add;
+                                            ?></p>
                                         </div>
                                     </div>
 
@@ -342,8 +384,16 @@ $username = "root";
                                         <div class="col-md-6">
                                             <label>Last Fee Paid?</label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <i class="fas fa-check" style="color:green;"></i>
+                                        <div class="col-md-6" id="paidfee">
+                                            <?php 
+                                                if ($dues){
+                                                    echo "<i class='fas fa-times' style='color:red;'></i>";
+                                                }
+                                                else{
+                                                    echo "<i class='fas fa-check' style='color:green;'></i>";
+                                                }
+                                            ?>
+                                            
                                         </div>
                                     </div>
                                     <div class="row">
@@ -351,7 +401,7 @@ $username = "root";
                                             <label>Pending Dues</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>None</p>
+                                            <p id="Dues"><?php echo $dues; ?></p>
                                         </div>
                                     </div>
                         </div>
@@ -362,7 +412,7 @@ $username = "root";
 
                                     <label>Route</label><br/>
                                     <p>The van route from SEECS will be</p>
-                                   <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin=place_id:ChIJL2y4BHSW3zgRhayOCiTAxGI&destination=place_id:ChIJv5Yb53m_3zgReHcyt3Bz2tk&key=AIzaSyAMH2owBJLzLI_SN9cQn6sEjEtL6WTelqk" allowfullscreen></iframe>
+                                   <iframe width="100%" height="450" frameborder="0" style="border:0" src="<?php echo $route; ?>" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -466,12 +516,58 @@ $username = "root";
         </div>
     </div>
 </div>
+
+<!-- Div for logout alert box -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="logout.php">Logout</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- Div for unregistering alert box -->
+<div class="modal fade" id="urModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you Sure?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Unregister" below if you are ready to unsubscribe to our services.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="remove.php">Unregister</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 <div class="row">
 	<div class="col-md-9 col-sm-8"></div>
 	<div class="col-md-3 col-sm-4">
 		<button class="btn btn-dark btn-lg" id="fbtn" onclick="fbin()">Got any feedback?</button>
 	</div>
 </div>
-
+<script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.redirect.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 </body>
 </html>
